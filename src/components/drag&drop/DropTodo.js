@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 
 const DropTodo = ({ todoCharacters }) => {
+  const [title,setTitle] = useState('')
+  const handleSubmit = (e) =>{
+    e.preventDefault()
+    console.log(title);
+  }
   return (
     <div>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
+        <button>Add ToDo</button>
+      </form>
       <Droppable droppableId="todo-characters" type="TASK">
         {(provided) => (
           <ul

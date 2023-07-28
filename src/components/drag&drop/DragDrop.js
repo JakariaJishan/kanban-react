@@ -31,7 +31,7 @@ const DragDrop = ({finalSpaceCharacters}) => {
 
   return (
     <div>
-      <div className="Home-header ">
+      <div className="Home-header w-96 mx-auto">
         <h2>To Do</h2>
         <DragDropContext onDragEnd={handleOnDragEndTodo}>
           <DropTodo todoCharacters={todoCharacters} />

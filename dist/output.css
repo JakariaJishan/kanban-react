@@ -584,6 +584,11 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .flex {
   display: flex;
 }
@@ -602,6 +607,10 @@ video {
 
 .h-96 {
   height: 24rem;
+}
+
+.w-96 {
+  width: 24rem;
 }
 
 .flex-1 {
