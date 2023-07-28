@@ -1,67 +1,116 @@
-import React, { useState } from 'react';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import '../../App.css';
+import React, { useState } from "react";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import "../../App.css";
 
 const finalSpaceCharacters = [
   {
-    id: 'gary',
-    name: 'Gary Goodspeed',
-    thumb: '/images/gary.png'
+    id: "gary",
+    name: "Gary Goodspeed",
+    thumb: "/images/gary.png",
   },
   {
-    id: 'cato',
-    name: 'Little Cato',
-    thumb: '/images/cato.png'
+    id: "cato",
+    name: "Little Cato",
+    thumb: "/images/cato.png",
   },
   {
-    id: 'kvn',
-    name: 'KVN',
-    thumb: '/images/kvn.png'
+    id: "kvn",
+    name: "KVN",
+    thumb: "/images/kvn.png",
   },
   {
-    id: 'mooncake',
-    name: 'Mooncake',
-    thumb: '/images/mooncake.png'
+    id: "mooncake",
+    name: "Mooncake",
+    thumb: "/images/mooncake.png",
   },
   {
-    id: 'quinn',
-    name: 'Quinn Ergon',
-    thumb: '/images/quinn.png'
-  }
-]
+    id: "quinn",
+    name: "Quinn Ergon",
+    thumb: "/images/quinn.png",
+  },
+];
 
 function Home() {
-  const [characters, updateCharacters] = useState(finalSpaceCharacters);
+  const [todoCharacters, updateTodoCharacters] = useState(finalSpaceCharacters);
+  const [inProgressCharacters, updateInProgressCharacters] = useState([]);
 
-  function handleOnDragEnd(result) {
+  function handleOnDragEndTodo(result) {
     if (!result.destination) return;
 
-    const items = Array.from(characters);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
+    let draggedItem;
 
-    updateCharacters(items);
+    if (result.source.droppableId === "todo-characters") {
+      draggedItem = todoCharacters[result.source.index];
+      console.log(draggedItem);
+      todoCharacters.splice(result.source.index, 1);
+    } else {
+      draggedItem = inProgressCharacters[result.source.index];
+      inProgressCharacters.splice(result.source.index, 1);
+    }
+    
+    if (result.destination.droppableId === "todo-characters") {
+      todoCharacters.splice(result.destination.index, 0, draggedItem);
+    } else {
+      inProgressCharacters.splice(result.destination.index, 0, draggedItem);
+    }
+    updateInProgressCharacters(inProgressCharacters);
+    updateTodoCharacters(todoCharacters);
   }
-console.log(characters);
+
   return (
-    <div className="App">
-      <header className="Home-header">
-        <h1>Final Space Characters</h1>
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="characters">
+    <div className="">
+      <div className="Home-header flex">
+        <h2>To Do</h2>
+        <DragDropContext onDragEnd={handleOnDragEndTodo}>
+          <Droppable droppableId="todo-characters" type="TASK">
             {(provided) => (
-              <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
-                {characters.map(({id, name, thumb}, index) => {
+              <ul
+                className="characters"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {todoCharacters.map(({ id, name, thumb }, index) => {
                   return (
                     <Draggable key={id} draggableId={id} index={index}>
                       {(provided) => (
-                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                        <li
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
                           <div className="characters-thumb">
                             <img src={thumb} alt={`${name} Thumb`} />
                           </div>
-                          <p>
-                            { name }
-                          </p>
+                          <p>{name}</p>
+                        </li>
+                      )}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+              </ul>
+            )}
+          </Droppable>
+          <Droppable droppableId="in-progress-characters" type="TASK">
+            {(provided) => (
+              <ul
+                className="characters2 flex flex-col flex-1 h-96 bg-blue-500"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {inProgressCharacters.map(({ id, name, thumb }, index) => {
+                  return (
+                    <Draggable key={id} draggableId={id} index={index}>
+                      {(provided) => (
+                        <li
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <div className="characters-thumb">
+                            <img src={thumb} alt={`${name} Thumb`} />
+                          </div>
+                          <p>{name}</p>
                         </li>
                       )}
                     </Draggable>
@@ -72,10 +121,7 @@ console.log(characters);
             )}
           </Droppable>
         </DragDropContext>
-      </header>
-      <p>
-        Images from <a href="https://final-space.fandom.com/wiki/Final_Space_Wiki">Final Space Wiki</a>
-      </p>
+      </div>
     </div>
   );
 }
