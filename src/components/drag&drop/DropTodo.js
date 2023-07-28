@@ -3,7 +3,6 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import Todo from "../todo/Todo";
 
 const DropTodo = ({ todoCharacters }) => {
-  
   return (
     <div>
      <Todo />
@@ -15,7 +14,7 @@ const DropTodo = ({ todoCharacters }) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {todoCharacters.map(({ id, name, thumb }, index) => {
+            {todoCharacters.map(({ id, title, description,date }, index) => {
               return (
                 <Draggable key={id} draggableId={id} index={index}>
                   {(provided) => (
@@ -24,10 +23,10 @@ const DropTodo = ({ todoCharacters }) => {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <div className="characters-thumb">
-                        <img src={thumb} alt={`${name} Thumb`} />
-                      </div>
-                      <p>{name}</p>
+                      
+                      <p>{title}</p>
+                      <p>{description}</p>
+                      <p>{date}</p>
                     </li>
                   )}
                 </Draggable>

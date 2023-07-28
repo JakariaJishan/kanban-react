@@ -36,7 +36,7 @@ function Home() {
 console.log(todos);
   return (
     <div className="">
-      <DragDrop finalSpaceCharacters={finalSpaceCharacters} />
+      <DragDrop finalSpaceCharacters={todos} />
     </div>
   );
 }

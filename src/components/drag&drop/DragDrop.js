@@ -1,32 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import DropInProgress from "./DropInProgress";
 import DropTodo from "./DropTodo";
 
-const DragDrop = ({finalSpaceCharacters}) => {
-  const [todoCharacters, updateTodoCharacters] = useState(finalSpaceCharacters);
+const DragDrop = ({ finalSpaceCharacters }) => {
+  const [todoCharacters, updateTodoCharacters] = useState([]);
   const [inProgressCharacters, updateInProgressCharacters] = useState([]);
+  useEffect(() => {
+    updateTodoCharacters(finalSpaceCharacters);
+  }, [finalSpaceCharacters]);
 
   function handleOnDragEndTodo(result) {
     if (!result.destination) return;
-
+    if (
+      result.destination.droppableId == result.source.droppableId &&
+      result.destination.index == result.source.index
+    )
+      return;
+    console.log(result);
     let draggedItem;
+    let updatedTodoCharacters = [...todoCharacters]; 
+    let updatedInProgressCharacters = [...inProgressCharacters]; 
 
     if (result.source.droppableId === "todo-characters") {
-      draggedItem = todoCharacters[result.source.index];
-      todoCharacters.splice(result.source.index, 1);
+      draggedItem = updatedTodoCharacters[result.source.index];
+      updatedTodoCharacters.splice(result.source.index, 1);
     } else {
-      draggedItem = inProgressCharacters[result.source.index];
-      inProgressCharacters.splice(result.source.index, 1);
+      draggedItem = updatedInProgressCharacters[result.source.index];
+      updatedInProgressCharacters.splice(result.source.index, 1);
     }
 
     if (result.destination.droppableId === "todo-characters") {
-      todoCharacters.splice(result.destination.index, 0, draggedItem);
+      updatedTodoCharacters.splice(result.destination.index, 0, draggedItem);
     } else {
-      inProgressCharacters.splice(result.destination.index, 0, draggedItem);
+      updatedInProgressCharacters.splice(
+        result.destination.index,
+        0,
+        draggedItem
+      );
     }
-    updateInProgressCharacters(inProgressCharacters);
-    updateTodoCharacters(todoCharacters);
+
+    updateInProgressCharacters(updatedInProgressCharacters);
+    updateTodoCharacters(updatedTodoCharacters);
   }
 
   return (
