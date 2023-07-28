@@ -1,16 +1,28 @@
 import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+import { useDispatch } from "react-redux";
+import { add } from "../../redux/features/counterSlice";
 
 const DropTodo = ({ todoCharacters }) => {
   const [title,setTitle] = useState('')
+  const [description,setDescription] = useState('')
+  const [date,setDate] = useState('')
+  const dispatch = useDispatch()
   const handleSubmit = (e) =>{
     e.preventDefault()
-    console.log(title);
+    let todo = {
+      title,
+      description,
+      date
+    }
+    dispatch(add(todo))
   }
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
+        <input type="text" required value={description} onChange={(e) => setDescription(e.target.value)}/>
+        <input type="date" required value={date} onChange={(e) => setDate(e.target.value)}/>
+        <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)}/>
         <button>Add ToDo</button>
       </form>
       <Droppable droppableId="todo-characters" type="TASK">
