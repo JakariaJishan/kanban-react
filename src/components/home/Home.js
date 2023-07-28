@@ -1,14 +1,32 @@
-import React from 'react'
-import Task from '../task/Task'
-import Todo from '../todo/Todo'
+import React, { useState } from 'react';
+import DraggableBox from '../drag&drop/DraggableBox';
+import DroppableBox from '../drag&drop/DroppableBox';
 
 const Home = () => {
-  return (
-    <div className='flex justify-center items-center h-screen  bg-slate-600 text-white'>
-      <Todo/>
-      <Task/>
-    </div>
-  )
-}
+  const [droppedBoxes, setDroppedBoxes] = useState([]);
 
-export default Home
+  const handleDrop = (boxName) => {
+    console.log(boxName);
+    setDroppedBoxes((prevBoxes) => [...prevBoxes, boxName]);
+  };
+
+  return (
+    <div style={{ padding: '16px' }}>
+      <h2>Drag and Drop Example</h2>
+      <DroppableBox onDrop={handleDrop}>
+        {droppedBoxes.map((box, index) => (
+          <div key={index} style={{ marginBottom: '8px' }}>
+            {box}
+          </div>
+        ))}
+      </DroppableBox>
+
+      <h3>Draggable Boxes</h3>
+      <DraggableBox name="Box 1" />
+      <DraggableBox name="Box 2" />
+      <DraggableBox name="Box 3" />
+    </div>
+  );
+};
+
+export default Home;
