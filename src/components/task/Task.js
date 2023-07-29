@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuid } from 'uuid';
-import { addInProgress } from "../../redux/features/counterSlice";
+import { addInProgress } from "../../redux/features/todoSlice";
 import FormItem from "../todo/FormItem";
 
 const Task = () => {

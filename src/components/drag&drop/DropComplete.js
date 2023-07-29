@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
-import { deleteComplete, editComplete } from "../../redux/features/counterSlice";
+import { deleteComplete, editComplete } from "../../redux/features/todoSlice";
 import Complete from "../complete/Complete";
 
 const DropComplete = ({ completeItems }) => {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuid } from 'uuid';
-import { addTodo } from "../../redux/features/counterSlice";
+import { addTodo } from "../../redux/features/todoSlice";
 import FormItem from "./FormItem";
 
 const Todo = () => {

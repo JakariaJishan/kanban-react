@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
-import { deleteTodo, editTodo } from "../../redux/features/counterSlice";
+import { deleteTodo, editTodo } from "../../redux/features/todoSlice";
 import Todo from "../todo/Todo";
 
 const DropTodo = ({ todoItems }) => {

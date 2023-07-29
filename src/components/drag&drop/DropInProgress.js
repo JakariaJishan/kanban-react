@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
-import { deleteInProgress, editInProgress } from "../../redux/features/counterSlice";
+import { deleteInProgress, editInProgress } from "../../redux/features/todoSlice";
 import Task from "../task/Task";
 
 const DropInProgress = ({ inProgressItems }) => {

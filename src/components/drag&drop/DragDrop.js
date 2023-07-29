@@ -1,7 +1,7 @@
 import React from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
-import { moveItem } from "../../redux/features/counterSlice";
+import { moveItem } from "../../redux/features/todoSlice";
 import DropComplete from "./DropComplete";
 import DropInProgress from "./DropInProgress";
 import DropTodo from "./DropTodo";
