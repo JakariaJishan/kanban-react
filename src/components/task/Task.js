@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuid } from 'uuid';
 import { addInProgress } from "../../redux/features/counterSlice";
-import FormItem from "./FormItem";
+import FormItem from "../todo/FormItem";
 
 const Task = () => {
   const [title, setTitle] = useState("");

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
 import { deleteInProgress, editInProgress } from "../../redux/features/counterSlice";
+import Task from "../task/Task";
 
 const DropInProgress = ({ inProgressItems }) => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const DropInProgress = ({ inProgressItems }) => {
   
   return (
     <div>
+      <Task/>
       <Droppable droppableId="in-progress-characters" type="TASK">
         {(provided) => (
           <ul
