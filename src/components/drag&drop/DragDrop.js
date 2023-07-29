@@ -1,53 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { DragDropContext } from "react-beautiful-dnd";
-import { useDispatch } from "react-redux";
-import { ondrag } from "../../redux/features/counterSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { moveItem } from "../../redux/features/counterSlice";
 import DropInProgress from "./DropInProgress";
 import DropTodo from "./DropTodo";
 
 const DragDrop = ({ finalSpaceCharacters }) => {
-  const [todoCharacters, updateTodoCharacters] = useState([]);
-  const [inProgressCharacters, updateInProgressCharacters] = useState([]);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    updateTodoCharacters(finalSpaceCharacters);
-  }, [finalSpaceCharacters]);
+  const {todoItems,inProgressItems} = useSelector(state => state.todo)
 
   function handleOnDragEndTodo(result) {
     if (!result.destination) return;
-    if (
-      result.destination.droppableId == result.source.droppableId &&
-      result.destination.index == result.source.index
-    )
-      return;
 
-    let draggedItem;
-    let updatedTodoCharacters = [...todoCharacters];
-    let updatedInProgressCharacters = [...inProgressCharacters];
+    const itemId = result.draggableId;
+    const sourceColumn = result.source.droppableId;
+    const destinationColumn = result.destination.droppableId;
 
-    if (result.source.droppableId === "todo-characters") {
-      draggedItem = updatedTodoCharacters[result.source.index];
-      updatedTodoCharacters.splice(result.source.index, 1);
-    } else {
-      draggedItem = updatedInProgressCharacters[result.source.index];
-      updatedInProgressCharacters.splice(result.source.index, 1);
-    }
-
-    if (result.destination.droppableId === "todo-characters") {
-      updatedTodoCharacters.splice(result.destination.index, 0, draggedItem);
-    } else {
-      updatedInProgressCharacters.splice(
-        result.destination.index,
-        0,
-        draggedItem
-      );
-    }
-
-    updateInProgressCharacters(updatedInProgressCharacters);
-    updateTodoCharacters(updatedTodoCharacters);
-
-    dispatch(ondrag(updatedTodoCharacters))
+    dispatch(moveItem({ itemId, sourceColumn, destinationColumn }));
   }
 
   return (
@@ -55,8 +24,8 @@ const DragDrop = ({ finalSpaceCharacters }) => {
       <div className="Home-header w-96 mx-auto">
         <h2>To Do</h2>
         <DragDropContext onDragEnd={handleOnDragEndTodo}>
-          <DropTodo todoCharacters={todoCharacters} />
-          <DropInProgress inProgressCharacters={inProgressCharacters} />
+          <DropTodo todoItems={todoItems} />
+          <DropInProgress inProgressItems={inProgressItems} />
         </DragDropContext>
       </div>
     </div>

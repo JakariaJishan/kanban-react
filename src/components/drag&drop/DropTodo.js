@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
-import { deleteItem, editItem } from "../../redux/features/counterSlice";
+import { deleteTodo, editTodo } from "../../redux/features/counterSlice";
 import Todo from "../todo/Todo";
 
-const DropTodo = ({ todoCharacters }) => {
+const DropTodo = ({ todoItems }) => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState("");
   const [titlex, setTitle] = useState("");
   const [descriptionx, setDescription] = useState("");
   const [datex, setDate] = useState("");
 
   const [isEditable, setIsEditable] = useState(null);
-  const [editableData, setEditableData] = useState({});
 
   const handleEditItem = (id) => {
     setIsEditable(id);
@@ -26,7 +24,7 @@ const DropTodo = ({ todoCharacters }) => {
       date: datex,
       id: isEditable,
     };
-    dispatch(editItem(editedItems));
+    dispatch(editTodo(editedItems));
     setIsEditable(null);
 
     setTitle("");
@@ -35,20 +33,20 @@ const DropTodo = ({ todoCharacters }) => {
   };
 
   const handleDeleteTodo = (id) => {
-    dispatch(deleteItem({ id }));
+    dispatch(deleteTodo({ id }));
   };
   
   return (
     <div>
       <Todo />
-      <Droppable droppableId="todo-characters" type="TASK">
+      <Droppable droppableId="todo" type="TASK">
         {(provided) => (
           <ul
             className="characters"
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {todoCharacters.map(({ id, title, description, date }, index) => {
+            {todoItems.map(({ id, title, description, date }, index) => {
               const isEditing = isEditable === id;
               return (
                 <Draggable key={id} draggableId={id} index={index}>
