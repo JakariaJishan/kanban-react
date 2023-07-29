@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
+import { ondrag } from "../../redux/features/counterSlice";
 import DropInProgress from "./DropInProgress";
 import DropTodo from "./DropTodo";
 
@@ -46,7 +47,7 @@ const DragDrop = ({ finalSpaceCharacters }) => {
     updateInProgressCharacters(updatedInProgressCharacters);
     updateTodoCharacters(updatedTodoCharacters);
 
-    // dispatch(ondrag(updatedTodoCharacters))
+    dispatch(ondrag(updatedTodoCharacters))
   }
 
   return (

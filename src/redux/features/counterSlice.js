@@ -15,7 +15,7 @@ export const todoSlice = createSlice({
       state.todoItems.push(action.payload);
     },
     ondrag: (state, action) => {
-      return action.payload;
+      state.todoItems = action.payload;
     },
     editItem: (state, action) => {
       const todoItem = state.todoItems.find(
