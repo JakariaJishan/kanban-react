@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
-import { editItem } from "../../redux/features/counterSlice";
+import { deleteItem, editItem } from "../../redux/features/counterSlice";
 import Todo from "../todo/Todo";
 
 const DropTodo = ({ todoCharacters }) => {
@@ -19,20 +19,25 @@ const DropTodo = ({ todoCharacters }) => {
   };
 
   const handleSaveItem = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     let editedItems = {
       title: titlex,
       description: descriptionx,
       date: datex,
-      id:isEditable
+      id: isEditable,
     };
     dispatch(editItem(editedItems));
     setIsEditable(null);
 
-    setTitle('')
-    setDescription('')
-    setDate('')
+    setTitle("");
+    setDescription("");
+    setDate("");
   };
+
+  const handleDeleteTodo = (id) => {
+    dispatch(deleteItem({ id }));
+  };
+  
   return (
     <div>
       <Todo />
@@ -54,7 +59,7 @@ const DropTodo = ({ todoCharacters }) => {
                       {...provided.dragHandleProps}
                     >
                       {isEditing ? (
-                        <form >
+                        <form>
                           <input
                             type="text"
                             required
@@ -85,7 +90,13 @@ const DropTodo = ({ todoCharacters }) => {
                             <button onClick={() => handleEditItem(id)}>
                               edit
                             </button>
-                            <button>delete</button>
+                            <button
+                              onClick={() => {
+                                handleDeleteTodo(id);
+                              }}
+                            >
+                              delete
+                            </button>
                           </div>
                         </div>
                       )}

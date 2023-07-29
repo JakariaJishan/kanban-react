@@ -18,7 +18,6 @@ export const todoSlice = createSlice({
       return action.payload;
     },
     editItem: (state, action) => {
-      console.log(action.payload);
       const todoItem = state.todoItems.find(
         (item) => item.id === action.payload.id
       );
@@ -28,10 +27,13 @@ export const todoSlice = createSlice({
         todoItem.date = action.payload.date;
       }
     },
+    deleteItem:(state,action)=>{
+      state.todoItems = state.todoItems.filter((item) => item.id !== action.payload.id);
+    }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { add, ondrag, editItem } = todoSlice.actions;
+export const { add, ondrag, editItem, deleteItem } = todoSlice.actions;
 
 export default todoSlice.reducer;
