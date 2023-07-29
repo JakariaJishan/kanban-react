@@ -5,7 +5,7 @@ import DragDrop from "../drag&drop/DragDrop";
 function Home() {
   
   return (
-    <div className="">
+    <div className="bg-[#22272E] h-screen text-white">
       <DragDrop />
     </div>
   );

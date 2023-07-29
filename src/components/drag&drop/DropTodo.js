@@ -37,12 +37,12 @@ const DropTodo = ({ todoItems }) => {
   };
   
   return (
-    <div>
+    <div className="bg-[#1C2128] p-5 h-[30rem] overflow-y-auto">
       <Todo />
       <Droppable droppableId="todo" type="TASK">
         {(provided) => (
           <ul
-            className="characters"
+            className="characters h-full"
             {...provided.droppableProps}
             ref={provided.innerRef}
           >

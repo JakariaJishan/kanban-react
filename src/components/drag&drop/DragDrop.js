@@ -7,9 +7,11 @@ import DropInProgress from "./DropInProgress";
 import DropTodo from "./DropTodo";
 
 const DragDrop = ({ finalSpaceCharacters }) => {
-  const [value,setValue] = useState('')
+  const [value, setValue] = useState("");
   const dispatch = useDispatch();
-  const {todoItems,inProgressItems,completeItems} = useSelector(state => state.todo)
+  const { todoItems, inProgressItems, completeItems } = useSelector(
+    (state) => state.todo
+  );
 
   function handleOnDragEndTodo(result) {
     if (!result.destination) return;
@@ -21,21 +23,29 @@ const DragDrop = ({ finalSpaceCharacters }) => {
     dispatch(moveItem({ itemId, sourceColumn, destinationColumn }));
   }
 
-  const handleFilter=()=>{
-    
-  }
+  const handleFilter = () => {};
 
   return (
     <div>
-      <div className="Home-header w-96 mx-auto">
-        <input type="text"  onChange={(e)=>setValue(e.target.value)}/>
-        <button onClick={handleFilter}>filter</button>
-        <h2>To Do</h2>
-        <DragDropContext onDragEnd={handleOnDragEndTodo}>
-          <DropTodo todoItems={todoItems} />
-          <DropInProgress inProgressItems={inProgressItems} />
-          <DropComplete completeItems={completeItems} />
-        </DragDropContext>
+      <div className="Home-header max-w-5xl mx-auto">
+        <h2 className="text-5xl font-bold text-[#ADBAC7] text-center py-8">
+          To Do
+        </h2>
+        <div className="flex gap-5">
+          <input
+            type="text"
+            className="w-full bg-[#5c5c5c]"
+            onChange={(e) => setValue(e.target.value)}
+          />
+          <button onClick={handleFilter}>filter</button>
+        </div>
+        <div className="flex gap-5 my-8 ">
+          <DragDropContext onDragEnd={handleOnDragEndTodo}>
+            <DropTodo todoItems={todoItems} />
+            <DropInProgress inProgressItems={inProgressItems} />
+            <DropComplete completeItems={completeItems} />
+          </DragDropContext>
+        </div>
       </div>
     </div>
   );

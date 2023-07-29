@@ -23,7 +23,7 @@ const Task = () => {
     dispatch(addInProgress(todo));
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} >
       <FormItem
         title={title}
         date={date}
