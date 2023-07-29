@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   todoItems: [],
   inProgressItems: [],
+  completeItems: [],
 };
 export const todoSlice = createSlice({
   name: "todo",
@@ -15,16 +16,29 @@ export const todoSlice = createSlice({
       // immutable state based off those changes
       state.todoItems.push(action.payload);
     },
-    addInProgress:(state,action) =>{
-      state.inProgressItems.push(action.payload)
+    addInProgress: (state, action) => {
+      state.inProgressItems.push(action.payload);
     },
+    addComplete: (state, action) => {
+      state.completeItems.push(action.payload);
+    },
+
     moveItem: (state, action) => {
       const { itemId, sourceColumn, destinationColumn } = action.payload;
 
       const sourceItems =
-        sourceColumn === "todo" ? state.todoItems : state.inProgressItems;
+        sourceColumn === "todo"
+          ? state.todoItems
+          : sourceColumn === "in-progress"
+          ? state.inProgressItems
+          : state.completeItems;
+
       const destinationItems =
-        destinationColumn === "todo" ? state.todoItems : state.inProgressItems;
+        destinationColumn === "todo"
+          ? state.todoItems
+          : destinationColumn === "in-progress"
+          ? state.inProgressItems
+          : state.completeItems;
 
       const itemIndex = sourceItems.findIndex((item) => item.id === itemId);
       if (itemIndex !== -1) {
@@ -52,22 +66,46 @@ export const todoSlice = createSlice({
         inProgressItem.date = action.payload.date;
       }
     },
+    editComplete: (state, action) => {
+      const completeItem = state.completeItems.find(
+        (item) => item.id === action.payload.id
+      );
+      if (completeItem) {
+        completeItem.title = action.payload.title;
+        completeItem.description = action.payload.description;
+        completeItem.date = action.payload.date;
+      }
+    },
     deleteTodo: (state, action) => {
-        state.todoItems = state.todoItems.filter(
-          (item) => item.id !== action.payload.id
-        );
-     
+      state.todoItems = state.todoItems.filter(
+        (item) => item.id !== action.payload.id
+      );
     },
     deleteInProgress: (state, action) => {
-        state.todoItems = state.todoItems.filter(
-          (item) => item.id !== action.payload.id
-        );
-     
+      state.inProgressItems = state.inProgressItems.filter(
+        (item) => item.id !== action.payload.id
+      );
+    },
+    deleteComplete: (state, action) => {
+      state.completeItems = state.completeItems.filter(
+        (item) => item.id !== action.payload.id
+      );
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addTodo,addInProgress,moveItem,deleteTodo,deleteInProgress,editInProgress,editTodo } = todoSlice.actions;
+export const {
+  addTodo,
+  addInProgress,
+  moveItem,
+  deleteTodo,
+  deleteInProgress,
+  editInProgress,
+  editTodo,
+  addComplete,
+  editComplete,
+  deleteComplete,
+} = todoSlice.actions;
 
 export default todoSlice.reducer;

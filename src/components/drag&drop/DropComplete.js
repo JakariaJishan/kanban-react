@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
-import { deleteInProgress, editInProgress } from "../../redux/features/counterSlice";
-import Task from "../task/Task";
+import { deleteComplete, editComplete } from "../../redux/features/counterSlice";
+import Complete from "../complete/Complete";
 
-const DropInProgress = ({ inProgressItems }) => {
+const DropComplete = ({ completeItems }) => {
   const dispatch = useDispatch();
   const [titlex, setTitle] = useState("");
   const [descriptionx, setDescription] = useState("");
@@ -24,7 +24,7 @@ const DropInProgress = ({ inProgressItems }) => {
       date: datex,
       id: isEditable,
     };
-    dispatch(editInProgress(editedItems));
+    dispatch(editComplete(editedItems));
     setIsEditable(null);
 
     setTitle("");
@@ -33,20 +33,20 @@ const DropInProgress = ({ inProgressItems }) => {
   };
 
   const handleDeleteTodo = (id) => {
-    dispatch(deleteInProgress({ id }));
+    dispatch(deleteComplete({ id }));
   };
   
   return (
     <div>
-      <Task/>
-      <Droppable droppableId="in-progress" type="TASK">
+      <Complete/>
+      <Droppable droppableId="complete" type="TASK">
         {(provided) => (
           <ul
             className="characters"
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {inProgressItems.map(({ id, title, description, date }, index) => {
+            {completeItems.map(({ id, title, description, date }, index) => {
               const isEditing = isEditable === id;
               return (
                 <Draggable key={id} draggableId={id} index={index}>
@@ -111,4 +111,4 @@ const DropInProgress = ({ inProgressItems }) => {
   );
 };
 
-export default DropInProgress;
+export default DropComplete;
