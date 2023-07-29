@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "../../App.css";
 import DragDrop from "../drag&drop/DragDrop";
@@ -32,11 +32,13 @@ const finalSpaceCharacters = [
 ];
 
 function Home() {
-  let todos = useSelector(state=>state.todo)
-console.log(todos);
+  const [todos, setTodos] = useState([])
+  let result = useSelector(state=>state.todo)
+  
+  
   return (
     <div className="">
-      <DragDrop finalSpaceCharacters={todos} />
+      <DragDrop finalSpaceCharacters={result} />
     </div>
   );
 }

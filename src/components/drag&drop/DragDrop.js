@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
+import { useDispatch } from "react-redux";
+import { ondrag } from "../../redux/features/counterSlice";
 import DropInProgress from "./DropInProgress";
 import DropTodo from "./DropTodo";
 
 const DragDrop = ({ finalSpaceCharacters }) => {
   const [todoCharacters, updateTodoCharacters] = useState([]);
   const [inProgressCharacters, updateInProgressCharacters] = useState([]);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     updateTodoCharacters(finalSpaceCharacters);
   }, [finalSpaceCharacters]);
@@ -17,10 +21,10 @@ const DragDrop = ({ finalSpaceCharacters }) => {
       result.destination.index == result.source.index
     )
       return;
-    console.log(result);
+
     let draggedItem;
-    let updatedTodoCharacters = [...todoCharacters]; 
-    let updatedInProgressCharacters = [...inProgressCharacters]; 
+    let updatedTodoCharacters = [...todoCharacters];
+    let updatedInProgressCharacters = [...inProgressCharacters];
 
     if (result.source.droppableId === "todo-characters") {
       draggedItem = updatedTodoCharacters[result.source.index];
@@ -42,6 +46,8 @@ const DragDrop = ({ finalSpaceCharacters }) => {
 
     updateInProgressCharacters(updatedInProgressCharacters);
     updateTodoCharacters(updatedTodoCharacters);
+
+    dispatch(ondrag(updatedTodoCharacters))
   }
 
   return (

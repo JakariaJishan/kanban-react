@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = [];
-
 export const todoSlice = createSlice({
   name: "todo",
   initialState,
@@ -13,11 +12,15 @@ export const todoSlice = createSlice({
       // immutable state based off those changes
       state.push(action.payload);
     },
+    ondrag: (state, action) => {
+      return action.payload
+    },
+    
     
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { add } = todoSlice.actions;
+export const { add,ondrag } = todoSlice.actions;
 
 export default todoSlice.reducer;
