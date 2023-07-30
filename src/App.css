@@ -30,30 +30,15 @@
 }
 
 .characters li {
-  border: solid 2px #9333EA;
-  border-radius: .2em;
+  border: solid 3px #9333EA;
+  border-radius: .5em;
   padding: .5em .8em .5em .5em;
   margin-bottom: 1em;
+
 }
 
 .characters p {
   max-width: none;
   font-weight: bold;
   margin: 0;
-}
-
-.characters-thumb {
-  overflow: hidden;
-  flex-shrink: 0;
-  width: 2em;
-  height: 2em;
-  background-color: #9333EA;
-  padding: .5em;
-  margin-right: .5em;
-}
-
-.characters-thumb img {
-  display: block;
-  width: 100%;
-  height: auto;
 }
