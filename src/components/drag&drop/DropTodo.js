@@ -37,7 +37,8 @@ const DropTodo = ({ todoItems }) => {
   };
   
   return (
-    <div className="bg-[#1C2128] p-5 h-[30rem] overflow-y-auto">
+    <div className="bg-[#1C2128] p-5 h-[30rem] overflow-y-auto relative">
+      
       <Todo />
       <Droppable droppableId="todo" type="TASK">
         {(provided) => (

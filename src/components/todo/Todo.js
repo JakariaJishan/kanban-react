@@ -23,7 +23,10 @@ const Todo = () => {
     dispatch(addTodo(todo));
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="mb-5 sticky top-0 left-0">
+      <div>
+        hello
+      </div>
       <FormItem
         title={title}
         date={date}
@@ -32,7 +35,7 @@ const Todo = () => {
         setDescription={setDescription}
         setTitle={setTitle}
       />
-      <button>Add ToDo</button>
+      <button className=" bg-purple-600 p-2 my-2">Add ToDo</button>
     </form>
   );
 };

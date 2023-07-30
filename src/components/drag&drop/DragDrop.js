@@ -27,7 +27,7 @@ const DragDrop = ({ finalSpaceCharacters }) => {
 
   return (
     <div>
-      <div className="Home-header max-w-5xl mx-auto">
+      <div className="Home-header w-11/12 mx-auto">
         <h2 className="text-5xl font-bold text-[#ADBAC7] text-center py-8">
           To Do
         </h2>
