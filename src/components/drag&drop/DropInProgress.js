@@ -7,10 +7,11 @@ import { deleteInProgress, editInProgress } from '../../redux/features/todoSlice
 import Task from '../task/Task';
 
 const DropInProgress = ({ inProgressItems }) => {
+  const now = new Date()
   const dispatch = useDispatch();
   const [titlex, setTitle] = useState('');
   const [descriptionx, setDescription] = useState('');
-  const [datex, setDate] = useState('');
+  const [datex, setDate] = useState(new Date(now).toJSON().slice(0, 10));
 
   const [isEditable, setIsEditable] = useState(null);
 
@@ -31,7 +32,7 @@ const DropInProgress = ({ inProgressItems }) => {
 
     setTitle('');
     setDescription('');
-    setDate('');
+    setDate(new Date(now).toJSON().slice(0, 10));
   };
 
   const handleDeleteTodo = (id) => {
@@ -64,9 +65,9 @@ const DropInProgress = ({ inProgressItems }) => {
                       {isEditing ? (
                         <form onSubmit={handleSaveItem}>
                           <div className="flex gap-2">
-                            <input
+                          <input
                               type="text"
-                              className="bg-[#41464e] w-full p-2 outline-purple-500 outline-offset-2 outline-4"
+                              className="bg-[#41464e] w-full p-2 focus:outline-purple-500 outline-none border-transparent focus:border-transparent focus:ring-0"
                               required
                               placeholder="Title"
                               value={titlex}
@@ -74,7 +75,7 @@ const DropInProgress = ({ inProgressItems }) => {
                             />
                             <input
                               type="text"
-                              className="bg-[#41464e] w-full p-2 outline-purple-500 outline-offset-2 outline-4"
+                              className="bg-[#41464e] w-full p-2 focus:outline-purple-500 outline-none border-transparent focus:border-transparent focus:ring-0"
                               placeholder="Description"
                               required
                               value={descriptionx}
@@ -82,7 +83,7 @@ const DropInProgress = ({ inProgressItems }) => {
                             />
                             <input
                               type="date"
-                              className=" bg-[#41464e] w-full p-2 outline-purple-500 outline-offset-2 outline-4"
+                              className="bg-[#41464e] text-gray-400 w-full p-2 focus:outline-purple-500 outline-none border-transparent focus:border-transparent focus:ring-0"
                               required
                               value={datex}
                               onChange={(e) => setDate(e.target.value)}
