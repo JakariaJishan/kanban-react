@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { Draggable, Droppable } from "react-beautiful-dnd";
-import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
-import { BsCheckCircle } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-import { deleteInProgress, editInProgress } from "../../redux/features/todoSlice";
-import Task from "../task/Task";
+import React, { useState } from 'react';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
+import { BsCheckCircle } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
+import { deleteInProgress, editInProgress } from '../../redux/features/todoSlice';
+import Task from '../task/Task';
 
 const DropInProgress = ({ inProgressItems }) => {
   const dispatch = useDispatch();
-  const [titlex, setTitle] = useState("");
-  const [descriptionx, setDescription] = useState("");
-  const [datex, setDate] = useState("");
+  const [titlex, setTitle] = useState('');
+  const [descriptionx, setDescription] = useState('');
+  const [datex, setDate] = useState('');
 
   const [isEditable, setIsEditable] = useState(null);
 
@@ -20,7 +20,7 @@ const DropInProgress = ({ inProgressItems }) => {
 
   const handleSaveItem = (e) => {
     e.preventDefault();
-    let editedItems = {
+    const editedItems = {
       title: titlex,
       description: descriptionx,
       date: datex,
@@ -29,18 +29,18 @@ const DropInProgress = ({ inProgressItems }) => {
     dispatch(editInProgress(editedItems));
     setIsEditable(null);
 
-    setTitle("");
-    setDescription("");
-    setDate("");
+    setTitle('');
+    setDescription('');
+    setDate('');
   };
 
   const handleDeleteTodo = (id) => {
     dispatch(deleteInProgress({ id }));
   };
-  
+
   return (
     <div className="bg-[#1C2128] p-5  relative">
-            <Task />
+      <Task />
 
       <Droppable droppableId="in-progress" type="TASK">
         {(provided) => (
@@ -49,7 +49,9 @@ const DropInProgress = ({ inProgressItems }) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {inProgressItems.map(({ id, title, description, date }, index) => {
+            {inProgressItems.map(({
+              id, title, description, date,
+            }, index) => {
               const isEditing = isEditable === id;
               return (
                 <Draggable key={id} draggableId={id} index={index}>
@@ -61,37 +63,37 @@ const DropInProgress = ({ inProgressItems }) => {
                     >
                       {isEditing ? (
                         <form onSubmit={handleSaveItem}>
-                        <div className="flex gap-2">
-                          <input
-                            type="text"
-                            className="bg-[#41464e] w-full p-2 outline-purple-500 outline-offset-2 outline-4"
-                            required
-                            placeholder="Title"
-                            value={titlex}
-                            onChange={(e) => setTitle(e.target.value)}
-                          />
-                          <input
-                            type="text"
-                            className="bg-[#41464e] w-full p-2 outline-purple-500 outline-offset-2 outline-4"
-                            placeholder="Description"
-                            required
-                            value={descriptionx}
-                            onChange={(e) => setDescription(e.target.value)}
-                          />
-                          <input
-                            type="date"
-                            className=" bg-[#41464e] w-full p-2 outline-purple-500 outline-offset-2 outline-4"
-                            required
-                            value={datex}
-                            onChange={(e) => setDate(e.target.value)}
-                          />
-                        </div>
-                        <button
-                          className="bg-[#347D39] p-2 my-2"
-                        >
-                          Save
-                        </button>
-                      </form>
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              className="bg-[#41464e] w-full p-2 outline-purple-500 outline-offset-2 outline-4"
+                              required
+                              placeholder="Title"
+                              value={titlex}
+                              onChange={(e) => setTitle(e.target.value)}
+                            />
+                            <input
+                              type="text"
+                              className="bg-[#41464e] w-full p-2 outline-purple-500 outline-offset-2 outline-4"
+                              placeholder="Description"
+                              required
+                              value={descriptionx}
+                              onChange={(e) => setDescription(e.target.value)}
+                            />
+                            <input
+                              type="date"
+                              className=" bg-[#41464e] w-full p-2 outline-purple-500 outline-offset-2 outline-4"
+                              required
+                              value={datex}
+                              onChange={(e) => setDate(e.target.value)}
+                            />
+                          </div>
+                          <button
+                            className="bg-[#347D39] p-2 my-2"
+                          >
+                            Save
+                          </button>
+                        </form>
                       ) : (
                         <div className="flex justify-between gap-5 items-start">
                           <div className=" flex gap-5">

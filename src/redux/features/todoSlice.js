@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   todoItems: [],
@@ -6,7 +6,7 @@ const initialState = {
   completeItems: [],
 };
 export const todoSlice = createSlice({
-  name: "todo",
+  name: 'todo',
   initialState,
   reducers: {
     addTodo: (state, action) => {
@@ -26,17 +26,15 @@ export const todoSlice = createSlice({
     moveItem: (state, action) => {
       const { itemId, sourceColumn, destinationColumn } = action.payload;
 
-      const sourceItems =
-        sourceColumn === "todo"
-          ? state.todoItems
-          : sourceColumn === "in-progress"
+      const sourceItems = sourceColumn === 'todo'
+        ? state.todoItems
+        : sourceColumn === 'in-progress'
           ? state.inProgressItems
           : state.completeItems;
 
-      const destinationItems =
-        destinationColumn === "todo"
-          ? state.todoItems
-          : destinationColumn === "in-progress"
+      const destinationItems = destinationColumn === 'todo'
+        ? state.todoItems
+        : destinationColumn === 'in-progress'
           ? state.inProgressItems
           : state.completeItems;
 
@@ -48,7 +46,7 @@ export const todoSlice = createSlice({
     },
     editTodo: (state, action) => {
       const todoItem = state.todoItems.find(
-        (item) => item.id === action.payload.id
+        (item) => item.id === action.payload.id,
       );
       if (todoItem) {
         todoItem.title = action.payload.title;
@@ -58,7 +56,7 @@ export const todoSlice = createSlice({
     },
     editInProgress: (state, action) => {
       const inProgressItem = state.inProgressItems.find(
-        (item) => item.id === action.payload.id
+        (item) => item.id === action.payload.id,
       );
       if (inProgressItem) {
         inProgressItem.title = action.payload.title;
@@ -68,7 +66,7 @@ export const todoSlice = createSlice({
     },
     editComplete: (state, action) => {
       const completeItem = state.completeItems.find(
-        (item) => item.id === action.payload.id
+        (item) => item.id === action.payload.id,
       );
       if (completeItem) {
         completeItem.title = action.payload.title;
@@ -78,17 +76,17 @@ export const todoSlice = createSlice({
     },
     deleteTodo: (state, action) => {
       state.todoItems = state.todoItems.filter(
-        (item) => item.id !== action.payload.id
+        (item) => item.id !== action.payload.id,
       );
     },
     deleteInProgress: (state, action) => {
       state.inProgressItems = state.inProgressItems.filter(
-        (item) => item.id !== action.payload.id
+        (item) => item.id !== action.payload.id,
       );
     },
     deleteComplete: (state, action) => {
       state.completeItems = state.completeItems.filter(
-        (item) => item.id !== action.payload.id
+        (item) => item.id !== action.payload.id,
       );
     },
   },

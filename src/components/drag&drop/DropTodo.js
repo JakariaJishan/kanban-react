@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { Draggable, Droppable } from "react-beautiful-dnd";
-import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
-import { BsCheckCircle } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-import { deleteTodo, editTodo } from "../../redux/features/todoSlice";
-import Todo from "../todo/Todo";
+import React, { useState } from 'react';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
+import { BsCheckCircle } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
+import { deleteTodo, editTodo } from '../../redux/features/todoSlice';
+import Todo from '../todo/Todo';
 
 const DropTodo = ({ todoItems }) => {
   const dispatch = useDispatch();
-  const [titlex, setTitle] = useState("");
-  const [descriptionx, setDescription] = useState("");
-  const [datex, setDate] = useState("");
+  const [titlex, setTitle] = useState('');
+  const [descriptionx, setDescription] = useState('');
+  const [datex, setDate] = useState('');
 
   const [isEditable, setIsEditable] = useState(null);
 
@@ -20,7 +20,7 @@ const DropTodo = ({ todoItems }) => {
 
   const handleSaveItem = (e) => {
     e.preventDefault();
-    let editedItems = {
+    const editedItems = {
       title: titlex,
       description: descriptionx,
       date: datex,
@@ -29,9 +29,9 @@ const DropTodo = ({ todoItems }) => {
     dispatch(editTodo(editedItems));
     setIsEditable(null);
 
-    setTitle("");
-    setDescription("");
-    setDate("");
+    setTitle('');
+    setDescription('');
+    setDate('');
   };
 
   const handleDeleteTodo = (id) => {
@@ -48,7 +48,9 @@ const DropTodo = ({ todoItems }) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {todoItems.map(({ id, title, description, date }, index) => {
+            {todoItems.map(({
+              id, title, description, date,
+            }, index) => {
               const isEditing = isEditable === id;
               return (
                 <Draggable key={id} draggableId={id} index={index}>

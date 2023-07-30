@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { BsCircleFill } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import { v4 as uuid } from "uuid";
-import { addComplete } from "../../redux/features/todoSlice";
-import FormItem from "../todo/FormItem";
+import React, { useState } from 'react';
+import { BsCircleFill } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uuid } from 'uuid';
+import { addComplete } from '../../redux/features/todoSlice';
+import FormItem from '../todo/FormItem';
 
 const Complete = () => {
-  const now =  new Date()
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const now = new Date();
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [date, setDate] = useState(new Date(now).toJSON().slice(0, 10));
   const state = useSelector((state) => state.todo.completeItems);
 
@@ -16,7 +16,7 @@ const Complete = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let todo = {
+    const todo = {
       title,
       description,
       date,
@@ -24,9 +24,9 @@ const Complete = () => {
     };
 
     dispatch(addComplete(todo));
-    setTitle('')
-    setDescription('')
-    setDate('')
+    setTitle('');
+    setDescription('');
+    setDate('');
   };
   return (
     <form
