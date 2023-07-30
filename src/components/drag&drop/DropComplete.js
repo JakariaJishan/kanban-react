@@ -37,7 +37,7 @@ const DropComplete = ({ completeItems }) => {
   };
   
   return (
-    <div className="bg-[#1C2128] p-5 h-[30rem] overflow-y-auto">
+    <div className="bg-[#1C2128] p-5 overflow-y-auto relative">
       <Complete/>
       <Droppable droppableId="complete" type="TASK">
         {(provided) => (
