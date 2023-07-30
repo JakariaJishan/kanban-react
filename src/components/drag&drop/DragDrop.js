@@ -53,7 +53,7 @@ const DragDrop = () => {
           Kanban Board
         </h2>
         <div>
-          <p>Search by Due Date</p>
+          <p>Filter by Due Date</p>
           <input
             type="date"
             className=" bg-[#41464e] text-gray-400  p-2 focus:outline-purple-500 outline-none border-transparent focus:border-transparent focus:ring-0"
