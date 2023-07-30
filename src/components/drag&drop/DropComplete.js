@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { BsCheckCircle } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { deleteComplete, editComplete } from "../../redux/features/todoSlice";
 import Complete from "../complete/Complete";
@@ -37,12 +39,12 @@ const DropComplete = ({ completeItems }) => {
   };
   
   return (
-    <div className="bg-[#1C2128] p-5 overflow-y-auto relative">
+    <div className="bg-[#1C2128] p-5  relative">
       <Complete/>
       <Droppable droppableId="complete" type="TASK">
         {(provided) => (
           <ul
-            className="characters h-96"
+            className="characters h-96 overflow-y-auto"
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
@@ -57,43 +59,62 @@ const DropComplete = ({ completeItems }) => {
                       {...provided.dragHandleProps}
                     >
                       {isEditing ? (
-                        <form>
+                        <form onSubmit={handleSaveItem}>
+                        <div className="flex gap-2">
                           <input
                             type="text"
+                            className="bg-[#41464e] w-full p-2 outline-purple-500 outline-offset-2 outline-4"
                             required
-                            autoFocus
+                            placeholder="Title"
+                            value={titlex}
+                            onChange={(e) => setTitle(e.target.value)}
+                          />
+                          <input
+                            type="text"
+                            className="bg-[#41464e] w-full p-2 outline-purple-500 outline-offset-2 outline-4"
+                            placeholder="Description"
+                            required
                             value={descriptionx}
                             onChange={(e) => setDescription(e.target.value)}
                           />
                           <input
                             type="date"
+                            className=" bg-[#41464e] w-full p-2 outline-purple-500 outline-offset-2 outline-4"
                             required
                             value={datex}
                             onChange={(e) => setDate(e.target.value)}
                           />
-                          <input
-                            type="text"
-                            required
-                            value={titlex}
-                            onChange={(e) => setTitle(e.target.value)}
-                          />
-                          <button onClick={handleSaveItem}>save</button>
-                        </form>
+                        </div>
+                        <button
+                          className="bg-[#347D39] p-2 my-2"
+                        >
+                          Save
+                        </button>
+                      </form>
                       ) : (
-                        <div>
-                          <p>{title}</p>
-                          <p>{description}</p>
-                          <p>{date}</p>
-                          <div className="float-right">
-                            <button onClick={() => handleEditItem(id)}>
-                              edit
+                        <div className="flex justify-between gap-5 items-start">
+                          <div className=" flex gap-5">
+                            <BsCheckCircle className="text-blue-500 text-2xl font-bold" />
+                            <div className="text-[#ADBAC7]">
+                              <p className="break-words">{title}</p>
+                              <p className="break-words">{description}</p>
+                              <p>{date}</p>
+                            </div>
+                          </div>
+                          <div className="flex gap-4 items-center">
+                            <button
+                              onClick={() => handleEditItem(id)}
+                              className="text-slate-500 text-2xl"
+                            >
+                              <AiOutlineEdit />
                             </button>
                             <button
                               onClick={() => {
                                 handleDeleteTodo(id);
                               }}
+                              className="text-2xl text-red-500"
                             >
-                              delete
+                              <AiOutlineDelete />
                             </button>
                           </div>
                         </div>
