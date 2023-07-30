@@ -43,7 +43,7 @@ const DropInProgress = ({ inProgressItems }) => {
       <Droppable droppableId="in-progress" type="TASK">
         {(provided) => (
           <ul
-            className="characters h-full"
+            className="characters h-96"
             {...provided.droppableProps}
             ref={provided.innerRef}
           >

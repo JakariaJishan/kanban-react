@@ -33,7 +33,7 @@ const Task = () => {
     >
        <div className="flex gap-2 py-3 items-center ">
         <BsCircleFill className="text-[#966600] text-2xl" />
-        <p className="font-bold text-xl">Todo</p>
+        <p className="font-bold text-xl">In Progress</p>
         <p className="px-2 bg-slate-700 rounded-full">{state.length}</p>
       </div>
       <FormItem

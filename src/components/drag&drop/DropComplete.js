@@ -42,7 +42,7 @@ const DropComplete = ({ completeItems }) => {
       <Droppable droppableId="complete" type="TASK">
         {(provided) => (
           <ul
-            className="characters h-full"
+            className="characters h-96"
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
