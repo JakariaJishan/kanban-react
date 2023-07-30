@@ -15,11 +15,12 @@ const DragDrop = () => {
   function handleOnDragEndTodo(result) {
     if (!result.destination) return;
 
-    const itemId = result.draggableId;
     const sourceColumn = result.source.droppableId;
     const destinationColumn = result.destination.droppableId;
+    const sourceIndex = result.source.index;
+    const destinationIndex = result.destination.index;
 
-    dispatch(moveItem({ itemId, sourceColumn, destinationColumn }));
+    dispatch(moveItem({ sourceColumn, destinationColumn,sourceIndex,destinationIndex }));
   }
 
   return (

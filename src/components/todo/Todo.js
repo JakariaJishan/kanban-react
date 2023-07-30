@@ -24,7 +24,7 @@ const Todo = () => {
     dispatch(addTodo(todo));
     setTitle('');
     setDescription('');
-    setDate('');
+    setDate(new Date(now).toJSON().slice(0, 10));
   };
   return (
     <form

@@ -26,7 +26,7 @@ const Complete = () => {
     dispatch(addComplete(todo));
     setTitle('');
     setDescription('');
-    setDate('');
+    setDate(new Date(now).toJSON().slice(0, 10));
   };
   return (
     <form

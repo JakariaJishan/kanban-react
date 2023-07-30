@@ -11,7 +11,7 @@ const FormItem = ({
   <div className="flex gap-2">
     <input
       type="text"
-      className="bg-[#41464e] w-full p-2 outline-purple-500 outline-offset-2 outline-4"
+      className="bg-[#41464e] w-full p-2 focus:outline-purple-500 outline-none border-transparent focus:border-transparent focus:ring-0"
       required
       placeholder="Title"
       value={title}
@@ -19,7 +19,7 @@ const FormItem = ({
     />
     <input
       type="text"
-      className="bg-[#41464e] w-full p-2 outline-purple-500 outline-offset-2 outline-4"
+      className="bg-[#41464e] w-full p-2 focus:outline-purple-500 outline-none border-transparent focus:border-transparent focus:ring-0"
       placeholder="Description"
       required
       value={description}
@@ -27,7 +27,7 @@ const FormItem = ({
     />
     <input
       type="date"
-      className=" bg-[#41464e] w-full p-2 outline-purple-500 outline-offset-2 outline-4"
+      className=" bg-[#41464e] text-gray-400 w-full p-2 focus:outline-purple-500 outline-none border-transparent focus:border-transparent focus:ring-0"
       required
       value={date}
       onChange={(e) => setDate(e.target.value)}
