@@ -34,7 +34,7 @@
   border-radius: .5em;
   padding: .5em .8em .5em .5em;
   margin-bottom: 1em;
-
+  box-shadow: rgba(97, 13, 153, 0.25) 0px 13px 27px -5px, rgba(109, 6, 177, 0.3) 0px 8px 16px -8px;
 }
 
 .characters p {
