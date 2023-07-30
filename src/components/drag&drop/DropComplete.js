@@ -49,7 +49,7 @@ const DropComplete = ({ completeItems }) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {completeItems.map(({
+            {completeItems?.map(({
               id, title, description, date,
             }, index) => {
               const isEditing = isEditable === id;

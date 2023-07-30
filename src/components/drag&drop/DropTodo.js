@@ -49,7 +49,7 @@ const DropTodo = ({ todoItems }) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {todoItems.map(({
+            {todoItems?.map(({
               id, title, description, date,
             }, index) => {
               const isEditing = isEditable === id;

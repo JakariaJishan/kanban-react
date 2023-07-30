@@ -50,7 +50,7 @@ const DropInProgress = ({ inProgressItems }) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {inProgressItems.map(({
+            {inProgressItems?.map(({
               id, title, description, date,
             }, index) => {
               const isEditing = isEditable === id;
