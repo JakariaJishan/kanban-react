@@ -1,5 +1,12 @@
+body {
+  max-height: 100vh;
+  background-color: #22272E;
+  color: white;
+}
+
 .App {
   text-align: center;
+  background-color: #22272E;
 }
 
 .App-header {
@@ -27,6 +34,7 @@
 .characters {
   list-style: none;
   padding-left: 0;
+  min-height: 80%;
 }
 
 .characters li {
