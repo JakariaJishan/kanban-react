@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid";
 import { addTodo } from "../../redux/features/todoSlice";
 import FormItem from "./FormItem";
 
 const Todo = () => {
+  const now = new Date()
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
-
+  const [date, setDate] = useState(new Date(now).toJSON().slice(0, 10));
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -17,9 +17,9 @@ const Todo = () => {
       title,
       description,
       date,
-      id:uuid()
+      id: uuid(),
     };
-    
+
     dispatch(addTodo(todo));
   };
   return (
