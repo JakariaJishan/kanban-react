@@ -26,12 +26,8 @@ export const todoSlice = createSlice({
     },
 
     moveItem: (state, action) => {
-      const {
-        sourceColumn,
-        destinationColumn,
-        sourceIndex,
-        destinationIndex,
-      } = action.payload;
+      const { sourceColumn, destinationColumn, sourceIndex, destinationIndex } =
+        action.payload;
 
       let add;
       let todo = state.todoItems;
@@ -108,6 +104,39 @@ export const todoSlice = createSlice({
         (item) => item.id !== action.payload.id
       );
     },
+    saveAssign: (state, action) => {
+      let { id, assignee, sourceColumn } = action.payload;
+      
+        const updatedTodoItems = state.todoItems.map((item) => {
+          if (item.id === id) {
+            return { ...item, assign: assignee };
+          }
+          return item; 
+        });
+
+        state.todoItems = updatedTodoItems;
+      
+      if (sourceColumn === "in-progress") {
+        const updatedProgressItems = state.inProgressItems.map((item) => {
+          if (item.id === id) {
+            return { ...item, assign: assignee };
+          }
+          return item; 
+        });
+
+        state.inProgressItems = updatedProgressItems;
+      }
+      if (sourceColumn === "complete") {
+        const updatedCompleteItems = state.completeItems.map((item) => {
+          if (item.id === id) {
+            return { ...item, assign: assignee };
+          }
+          return item; 
+        });
+
+        state.completeItems = updatedCompleteItems;
+      }
+    },
   },
 });
 
@@ -123,6 +152,7 @@ export const {
   addComplete,
   editComplete,
   deleteComplete,
+  saveAssign,
 } = todoSlice.actions;
 
 export default todoSlice.reducer;

@@ -50,3 +50,10 @@ body {
   font-weight: bold;
   margin: 0;
 }
+
+input[type=radio] {
+  border: 0px;
+  width: 28%;
+  margin-right: 5px;
+  height: 2em;
+}

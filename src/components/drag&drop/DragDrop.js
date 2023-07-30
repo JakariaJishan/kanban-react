@@ -9,6 +9,8 @@ import DropTodo from "./DropTodo";
 const DragDrop = () => {
   const dispatch = useDispatch();
   const [desiredDate, setDesiredDate] = useState("");
+  const [sourceColumn, setSourceColumn] = useState("");
+
   let { todoItems, inProgressItems, completeItems } = useSelector(
     (state) => state.todo
   );
@@ -27,14 +29,13 @@ const DragDrop = () => {
   const handleClearDate = () => {
     setDesiredDate("");
   };
-
   function handleOnDragEndTodo(result) {
     if (!result.destination) return;
-
     const sourceColumn = result.source.droppableId;
     const destinationColumn = result.destination.droppableId;
     const sourceIndex = result.source.index;
     const destinationIndex = result.destination.index;
+    setSourceColumn(sourceColumn);
 
     dispatch(
       moveItem({
@@ -60,14 +61,25 @@ const DragDrop = () => {
             value={desiredDate}
             onChange={(e) => setDesiredDate(e.target.value)}
           />
-          <button onClick={handleClearDate} className="p-2 m-2 bg-gray-600 text-white">Clear Date</button>
+          <button
+            onClick={handleClearDate}
+            className="p-2 m-2 bg-gray-600 text-white"
+          >
+            Clear Date
+          </button>
         </div>
 
         <div className="flex gap-5 my-8 justify-center items-start">
           <DragDropContext onDragEnd={handleOnDragEndTodo}>
-            <DropTodo todoItems={todoItems} />
-            <DropInProgress inProgressItems={inProgressItems} />
-            <DropComplete completeItems={completeItems} />
+            <DropTodo todoItems={todoItems} sourceColumn={sourceColumn} />
+            <DropInProgress
+              inProgressItems={inProgressItems}
+              sourceColumn={sourceColumn}
+            />
+            <DropComplete
+              completeItems={completeItems}
+              sourceColumn={sourceColumn}
+            />
           </DragDropContext>
         </div>
       </div>

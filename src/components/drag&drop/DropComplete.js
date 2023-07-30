@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
-import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
-import { BsCheckCircle } from 'react-icons/bs';
-import { useDispatch } from 'react-redux';
-import { deleteComplete, editComplete } from '../../redux/features/todoSlice';
-import Complete from '../complete/Complete';
+import React, { useState } from "react";
+import { Draggable, Droppable } from "react-beautiful-dnd";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { BsCheckCircle, BsThreeDots } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import {
+  deleteComplete,
+  editComplete,
+  saveAssign,
+} from "../../redux/features/todoSlice";
+import Complete from "../complete/Complete";
 
-const DropComplete = ({ completeItems }) => {
-  const now = new Date()
+const DropComplete = ({ completeItems, sourceColumn }) => {
+  const now = new Date();
   const dispatch = useDispatch();
-  const [titlex, setTitle] = useState('');
-  const [descriptionx, setDescription] = useState('');
+  const [titlex, setTitle] = useState("");
+  const [descriptionx, setDescription] = useState("");
   const [datex, setDate] = useState(new Date(now).toJSON().slice(0, 10));
 
+  const [isOpenAble, setIsOpenAble] = useState(null);
   const [isEditable, setIsEditable] = useState(null);
+  const [assignee, setAssignee] = useState("");
 
   const handleEditItem = (id) => {
     setIsEditable(id);
@@ -30,8 +36,8 @@ const DropComplete = ({ completeItems }) => {
     dispatch(editComplete(editedItems));
     setIsEditable(null);
 
-    setTitle('');
-    setDescription('');
+    setTitle("");
+    setDescription("");
     setDate(new Date(now).toJSON().slice(0, 10));
   };
 
@@ -39,6 +45,14 @@ const DropComplete = ({ completeItems }) => {
     dispatch(deleteComplete({ id }));
   };
 
+  const handleAssignment = (id) => {
+    setIsOpenAble(id);
+  };
+
+  const saveAssignment = (id) => {
+    dispatch(saveAssign({ assignee, id, sourceColumn }));
+    setIsOpenAble(null);
+  };
   return (
     <div className="bg-[#1C2128] p-5  relative">
       <Complete />
@@ -49,10 +63,10 @@ const DropComplete = ({ completeItems }) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {completeItems?.map(({
-              id, title, description, date,
-            }, index) => {
+            {completeItems?.map(({ id, title, description, date }, index) => {
               const isEditing = isEditable === id;
+              const isOpen = isOpenAble === id;
+
               return (
                 <Draggable key={id} draggableId={id} index={index}>
                   {(provided) => (
@@ -64,7 +78,7 @@ const DropComplete = ({ completeItems }) => {
                       {isEditing ? (
                         <form onSubmit={handleSaveItem}>
                           <div className="flex gap-2">
-                          <input
+                            <input
                               type="text"
                               className="bg-[#41464e] w-full p-2 focus:outline-purple-500 outline-none border-transparent focus:border-transparent focus:ring-0"
                               required
@@ -88,9 +102,7 @@ const DropComplete = ({ completeItems }) => {
                               onChange={(e) => setDate(e.target.value)}
                             />
                           </div>
-                          <button
-                            className="bg-[#347D39] p-2 my-2"
-                          >
+                          <button className="bg-[#347D39] p-2 my-2">
                             Save
                           </button>
                         </form>
@@ -105,6 +117,53 @@ const DropComplete = ({ completeItems }) => {
                             </div>
                           </div>
                           <div className="flex gap-4 items-center">
+                            {isOpen ? (
+                              <div className="z-10 bg-slate-400 absolute">
+                                <form
+                                  onSubmit={(e) => {
+                                    e.preventDefault();
+                                    saveAssignment(id);
+                                  }}
+                                  className="text-xl"
+                                >
+                                  <ul className="w-[120px] p-2">
+                                    <li className="flex justify-center items-center mb-1">
+                                      <input
+                                        type="radio"
+                                        name="assignee"
+                                        value="jack"
+                                        onChange={(e) =>
+                                          setAssignee(e.target.value)
+                                        }
+                                      />
+                                      Jack
+                                    </li>
+                                    <li className="flex justify-center items-center mb-1">
+                                      <input
+                                        type="radio"
+                                        name="assignee"
+                                        value="joe"
+                                        onChange={(e) =>
+                                          setAssignee(e.target.value)
+                                        }
+                                      />
+                                      joe
+                                    </li>
+                                  </ul>
+                                  <button
+                                    type="submit"
+                                    className="p-2 hover:bg-slate-600 w-full"
+                                  >
+                                    {" "}
+                                    save
+                                  </button>
+                                </form>
+                              </div>
+                            ) : null}
+
+                            <button onClick={(e) => handleAssignment(id)}>
+                              <BsThreeDots />
+                            </button>
                             <button
                               onClick={() => handleEditItem(id)}
                               className="text-slate-500 text-2xl"
