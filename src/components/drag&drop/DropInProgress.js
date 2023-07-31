@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { deleteInProgress, editInProgress, saveAssign } from '../../redux/features/todoSlice';
 import Task from '../task/Task';
 
-const DropInProgress = ({ inProgressItems,sourceColumn }) => {
+const DropInProgress = ({ inProgressItems,destinationColumn }) => {
   const now = new Date()
   const dispatch = useDispatch();
   const [titlex, setTitle] = useState('');
@@ -46,7 +46,7 @@ const DropInProgress = ({ inProgressItems,sourceColumn }) => {
   };
 
   const saveAssignment = (id) => {
-    dispatch(saveAssign({ assignee, id ,sourceColumn}));
+    dispatch(saveAssign({ assignee, id ,destinationColumn, track: true }));
     setIsOpenAble(null);
   };
   return (
@@ -61,7 +61,7 @@ const DropInProgress = ({ inProgressItems,sourceColumn }) => {
             ref={provided.innerRef}
           >
             {inProgressItems?.map(({
-              id, title, description, date,
+              id, title, description, date, assign
             }, index) => {
               const isEditing = isEditable === id;
               const isOpen = isOpenAble === id;
@@ -115,6 +115,7 @@ const DropInProgress = ({ inProgressItems,sourceColumn }) => {
                               <p className="break-words">{title}</p>
                               <p className="break-words">{description}</p>
                               <p>{date}</p>
+                              <p>{assign}</p>
                             </div>
                           </div>
                           <div className="flex gap-4 items-center">

@@ -10,7 +10,7 @@ import {
 } from "../../redux/features/todoSlice";
 import Complete from "../complete/Complete";
 
-const DropComplete = ({ completeItems, sourceColumn }) => {
+const DropComplete = ({ completeItems, destinationColumn }) => {
   const now = new Date();
   const dispatch = useDispatch();
   const [titlex, setTitle] = useState("");
@@ -50,7 +50,7 @@ const DropComplete = ({ completeItems, sourceColumn }) => {
   };
 
   const saveAssignment = (id) => {
-    dispatch(saveAssign({ assignee, id, sourceColumn }));
+    dispatch(saveAssign({ assignee, id, destinationColumn, track: true  }));
     setIsOpenAble(null);
   };
   return (
@@ -63,7 +63,7 @@ const DropComplete = ({ completeItems, sourceColumn }) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {completeItems?.map(({ id, title, description, date }, index) => {
+            {completeItems?.map(({ id, title, description, date,assign }, index) => {
               const isEditing = isEditable === id;
               const isOpen = isOpenAble === id;
 
@@ -114,6 +114,7 @@ const DropComplete = ({ completeItems, sourceColumn }) => {
                               <p className="break-words">{title}</p>
                               <p className="break-words">{description}</p>
                               <p>{date}</p>
+                              <p>{assign}</p>
                             </div>
                           </div>
                           <div className="flex gap-4 items-center">

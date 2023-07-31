@@ -9,7 +9,7 @@ import DropTodo from "./DropTodo";
 const DragDrop = () => {
   const dispatch = useDispatch();
   const [desiredDate, setDesiredDate] = useState("");
-  const [sourceColumn, setSourceColumn] = useState("");
+  const [destinationColumn, setDestinationColumn] = useState("");
 
   let { todoItems, inProgressItems, completeItems } = useSelector(
     (state) => state.todo
@@ -35,7 +35,7 @@ const DragDrop = () => {
     const destinationColumn = result.destination.droppableId;
     const sourceIndex = result.source.index;
     const destinationIndex = result.destination.index;
-    setSourceColumn(sourceColumn);
+    setDestinationColumn(destinationColumn);
 
     dispatch(
       moveItem({
@@ -46,7 +46,6 @@ const DragDrop = () => {
       })
     );
   }
-
   return (
     <div>
       <div className="Home-header w-11/12 mx-auto">
@@ -71,14 +70,14 @@ const DragDrop = () => {
 
         <div className="flex gap-5 my-8 justify-center items-start">
           <DragDropContext onDragEnd={handleOnDragEndTodo}>
-            <DropTodo todoItems={todoItems} sourceColumn={sourceColumn} />
+            <DropTodo todoItems={todoItems} destinationColumn={destinationColumn} />
             <DropInProgress
               inProgressItems={inProgressItems}
-              sourceColumn={sourceColumn}
+              destinationColumn={destinationColumn}
             />
             <DropComplete
               completeItems={completeItems}
-              sourceColumn={sourceColumn}
+              destinationColumn={destinationColumn}
             />
           </DragDropContext>
         </div>

@@ -105,33 +105,45 @@ export const todoSlice = createSlice({
       );
     },
     saveAssign: (state, action) => {
-      let { id, assignee, sourceColumn } = action.payload;
-      
+      let { id, assignee, destinationColumn, track } = action.payload;
+      if (destinationColumn === "todo" || track == true) {
         const updatedTodoItems = state.todoItems.map((item) => {
           if (item.id === id) {
-            return { ...item, assign: assignee };
+            return {
+              ...item,
+              assign: assignee,
+              isTodo: destinationColumn === "todo" || true,
+            };
           }
-          return item; 
+          return item;
         });
 
         state.todoItems = updatedTodoItems;
-      
-      if (sourceColumn === "in-progress") {
+      }
+      if (destinationColumn === "in-progress" || track == true) {
         const updatedProgressItems = state.inProgressItems.map((item) => {
           if (item.id === id) {
-            return { ...item, assign: assignee };
+            return {
+              ...item,
+              assign: assignee,
+              isTodo: destinationColumn === "in-progress" || true,
+            };
           }
-          return item; 
+          return item;
         });
 
         state.inProgressItems = updatedProgressItems;
       }
-      if (sourceColumn === "complete") {
+      if (destinationColumn === "complete" || track == true) {
         const updatedCompleteItems = state.completeItems.map((item) => {
           if (item.id === id) {
-            return { ...item, assign: assignee };
+            return {
+              ...item,
+              assign: assignee,
+              isTodo: destinationColumn === "complete" || true,
+            };
           }
-          return item; 
+          return item;
         });
 
         state.completeItems = updatedCompleteItems;

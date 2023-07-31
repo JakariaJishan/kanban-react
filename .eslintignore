@@ -1,1 +1,2 @@
-src/components/redux/*
+src/components/redux/features/*
+src/components/*

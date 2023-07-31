@@ -19,6 +19,7 @@ const Todo = () => {
       description,
       date,
       id: uuid(),
+      isTodo: false
     };
 
     dispatch(addTodo(todo));

@@ -10,7 +10,7 @@ import {
 } from "../../redux/features/todoSlice";
 import Todo from "../todo/Todo";
 
-const DropTodo = ({ todoItems,sourceColumn }) => {
+const DropTodo = ({ todoItems, destinationColumn }) => {
   const now = new Date();
   const dispatch = useDispatch();
   const [titlex, setTitle] = useState("");
@@ -49,7 +49,7 @@ const DropTodo = ({ todoItems,sourceColumn }) => {
   };
 
   const saveAssignment = (id) => {
-    dispatch(saveAssign({ assignee, id,sourceColumn }));
+    dispatch(saveAssign({ assignee, id, destinationColumn, track: true }));
     setIsOpenAble(null);
   };
 
