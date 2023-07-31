@@ -1,8 +1,8 @@
 <a name="readme-top"></a>
 
 <div align="center">
-   <h1><b>Calculator</b></h1>
-  <!-- <img src="./src/assets/readme_img.png" alt="calculator image" width="100%" /> -->
+   <h1><b>Kanban X</b></h1>
+<img src="https://github.com/JakariaJishan/kanban-react/assets/73704727/00abc95b-c80b-4bb0-80d0-7999dadceb23" alt="calculator image" width="100%" /> 
 </div>
 
 <!-- TABLE OF CONTENTS -->
@@ -33,7 +33,7 @@
 
 # 📖 Calculator <a name="about-project"></a>
 
-**Calculator react** is a webapp built using React.
+**Kanban X** is a webapp built using React React, Redux toolkit. 
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -70,7 +70,7 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **Calculator is currently on construction so it does not have features yet.**
+- ** Kanbar X uses to create tasks, assign tasks for specific priority, search tasks based on the due date, can assign users to specific tasks etc.**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -78,7 +78,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [under_construction](under_construction)
+- [Live Link](https://kanbanx.netlify.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -103,7 +103,7 @@ Clone this repository in the desired folder:
 
 ```
 cd my-folder
-git clone https://github.com/JakariaJishan/calculator-react.git
+git clone https://github.com/JakariaJishan/kanban-react.git
 ```
 
 ### Install
@@ -111,7 +111,7 @@ git clone https://github.com/JakariaJishan/calculator-react.git
 To install this project:
 
 ```
-cd calculator-react
+cd kanban-react
 code .
 npm install
 ```
@@ -133,6 +133,7 @@ npm start
 👤 **Jakaria jishan**
 
 - GitHub: [@jakaria](https://github.com/JakariaJishan)
+- Linkedin: [@jakaria](https://www.linkedin.com/in/jakariajishan/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -168,7 +169,7 @@ If you like this project feel free to frok it and use it as you need.
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-I would like to thank Microverse for the information provided to build this project.
+I would like to thank Code Rex for the information provided to build this project.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -178,11 +179,11 @@ I would like to thank Microverse for the information provided to build this proj
 
 - **Can I use the project for any purpose?**
 
-  - Yes, you can use this files for anything you need.
+  - Yes, you can use these files for anything you need.
 
 - **Is the information saved in any database?**
 
-  - No, all data is saved in Local Storage.
+  - No, all data will not be saved.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
