@@ -112,10 +112,10 @@ const DropInProgress = ({ inProgressItems,destinationColumn }) => {
                           <div className=" flex gap-5">
                             <BsCheckCircle className="text-blue-500 text-2xl font-bold" />
                             <div className="text-[#ADBAC7]">
-                              <p className="break-words">{title}</p>
-                              <p className="break-words">{description}</p>
-                              <p>{date}</p>
-                              <p>{assign}</p>
+                            <p className="break-words">Task: {title}</p>
+                                <p className="break-words">Desc: {description}</p>
+                                <p>Due Date: {date}</p>
+                                <p>Assignee: {assign}</p>
                             </div>
                           </div>
                           <div className="flex gap-4 items-center">
