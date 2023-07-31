@@ -121,7 +121,8 @@ npm install
 To run the project, execute the following command:
 
 ```
-npm start
+npm run start
+npm run watch
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
