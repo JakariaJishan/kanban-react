@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   todoItems: [],
@@ -8,7 +8,7 @@ const initialState = {
   completeItems: [],
 };
 export const todoSlice = createSlice({
-  name: "todo",
+  name: 'todo',
   initialState,
   reducers: {
     addTodo: (state, action) => {
@@ -26,30 +26,31 @@ export const todoSlice = createSlice({
     },
 
     moveItem: (state, action) => {
-      const { sourceColumn, destinationColumn, sourceIndex, destinationIndex } =
-        action.payload;
+      const {
+        sourceColumn, destinationColumn, sourceIndex, destinationIndex,
+      } = action.payload;
 
       let add;
-      let todo = state.todoItems;
-      let progress = state.inProgressItems;
-      let done = state.completeItems;
+      const todo = state.todoItems;
+      const progress = state.inProgressItems;
+      const done = state.completeItems;
 
-      if (sourceColumn === "todo") {
+      if (sourceColumn === 'todo') {
         add = todo[sourceIndex];
         todo.splice(sourceIndex, 1);
       }
-      if (sourceColumn === "in-progress") {
+      if (sourceColumn === 'in-progress') {
         add = progress[sourceIndex];
         progress.splice(sourceIndex, 1);
       }
-      if (sourceColumn === "complete") {
+      if (sourceColumn === 'complete') {
         add = done[sourceIndex];
         done.splice(sourceIndex, 1);
       }
 
-      if (destinationColumn === "todo") {
+      if (destinationColumn === 'todo') {
         todo.splice(destinationIndex, 0, add);
-      } else if (destinationColumn === "in-progress") {
+      } else if (destinationColumn === 'in-progress') {
         progress.splice(destinationIndex, 0, add);
       } else {
         done.splice(destinationIndex, 0, add);
@@ -61,7 +62,7 @@ export const todoSlice = createSlice({
     },
     editTodo: (state, action) => {
       const todoItem = state.todoItems.find(
-        (item) => item.id === action.payload.id
+        (item) => item.id === action.payload.id,
       );
       if (todoItem) {
         todoItem.title = action.payload.title;
@@ -71,7 +72,7 @@ export const todoSlice = createSlice({
     },
     editInProgress: (state, action) => {
       const inProgressItem = state.inProgressItems.find(
-        (item) => item.id === action.payload.id
+        (item) => item.id === action.payload.id,
       );
       if (inProgressItem) {
         inProgressItem.title = action.payload.title;
@@ -81,7 +82,7 @@ export const todoSlice = createSlice({
     },
     editComplete: (state, action) => {
       const completeItem = state.completeItems.find(
-        (item) => item.id === action.payload.id
+        (item) => item.id === action.payload.id,
       );
       if (completeItem) {
         completeItem.title = action.payload.title;
@@ -91,28 +92,30 @@ export const todoSlice = createSlice({
     },
     deleteTodo: (state, action) => {
       state.todoItems = state.todoItems.filter(
-        (item) => item.id !== action.payload.id
+        (item) => item.id !== action.payload.id,
       );
     },
     deleteInProgress: (state, action) => {
       state.inProgressItems = state.inProgressItems.filter(
-        (item) => item.id !== action.payload.id
+        (item) => item.id !== action.payload.id,
       );
     },
     deleteComplete: (state, action) => {
       state.completeItems = state.completeItems.filter(
-        (item) => item.id !== action.payload.id
+        (item) => item.id !== action.payload.id,
       );
     },
     saveAssign: (state, action) => {
-      let { id, assignee, destinationColumn, track } = action.payload;
-      if (destinationColumn === "todo" || track == true) {
+      const {
+        id, assignee, destinationColumn, track,
+      } = action.payload;
+      if (destinationColumn === 'todo' || track === true) {
         const updatedTodoItems = state.todoItems.map((item) => {
           if (item.id === id) {
             return {
               ...item,
               assign: assignee,
-              isTodo: destinationColumn === "todo" || true,
+              isTodo: destinationColumn === 'todo' || true,
             };
           }
           return item;
@@ -120,13 +123,13 @@ export const todoSlice = createSlice({
 
         state.todoItems = updatedTodoItems;
       }
-      if (destinationColumn === "in-progress" || track == true) {
+      if (destinationColumn === 'in-progress' || track === true) {
         const updatedProgressItems = state.inProgressItems.map((item) => {
           if (item.id === id) {
             return {
               ...item,
               assign: assignee,
-              isTodo: destinationColumn === "in-progress" || true,
+              isTodo: destinationColumn === 'in-progress' || true,
             };
           }
           return item;
@@ -134,13 +137,13 @@ export const todoSlice = createSlice({
 
         state.inProgressItems = updatedProgressItems;
       }
-      if (destinationColumn === "complete" || track == true) {
+      if (destinationColumn === 'complete' || track === true) {
         const updatedCompleteItems = state.completeItems.map((item) => {
           if (item.id === id) {
             return {
               ...item,
               assign: assignee,
-              isTodo: destinationColumn === "complete" || true,
+              isTodo: destinationColumn === 'complete' || true,
             };
           }
           return item;
